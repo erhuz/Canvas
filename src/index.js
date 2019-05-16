@@ -3,8 +3,8 @@
 import Phaser from "phaser";
 import Hero from "./assets/Characters/player/player.png";
 import Atlas from "./assets/Characters/player/player.json";
-import PlatformImg from "./assets/Platforms/platform.png";
-import GroundImg from "./assets/Platforms/ground.png";
+import PlatformImg from "./assets/World/Platforms/platform.png";
+import GroundImg from "./assets/World/Platforms/ground.png";
 
 const config = {
   type: Phaser.AUTO,
@@ -46,7 +46,7 @@ function create() {
   platforms = this.physics.add.staticGroup();
   platforms.create(400, 568, 'ground').setScale(2).refreshBody();
 
-  platforms.create()
+  platforms.create(250, 400, 'platform');
 
   // Create Animations
   this.anims.create({
