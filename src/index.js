@@ -5,6 +5,7 @@ import Hero from "./assets/Characters/player/player.png";
 import Atlas from "./assets/Characters/player/player.json";
 import PlatformImg from "./assets/World/Platforms/platform.png";
 import GroundImg from "./assets/World/Platforms/ground.png";
+import Background5 from "./assets/World/Background/parallax-mountain-bg.png";
 
 const config = {
   type: Phaser.AUTO,
@@ -32,12 +33,16 @@ let cursors;
 
 
 function preload() {
+  this.load.image("background-5", Background5);
   this.load.atlas("player", Hero, Atlas);
   this.load.image("ground", GroundImg);
   this.load.image("platform", PlatformImg);
 }
 
 function create() {
+
+  // Create background
+  this.add.image(250,260,'background-5').setScale(3.5);
 
   // Create player
   player = this.add.sprite(100, 300, "player", "Idle/0001.png" );
