@@ -1,12 +1,21 @@
 import Phaser from "phaser";
 import Hero from "./assets/Characters/player/player.png";
 import Atlas from "./assets/Characters/player/player.json";
+import PlatformImg from "./assets/Platforms/platform.png";
+import GroundImg from "./assets/Platforms/ground.png";
 
 const config = {
   type: Phaser.AUTO,
   parent: "phaser-example",
   width: 800,
   height: 600,
+  physics: {
+      default: 'arcade',
+      arcade: {
+          gravity: { y: 300 },
+          debug: false
+      }
+  },
   scene: {
     preload: preload,
     create: create,
@@ -16,18 +25,28 @@ const config = {
 const game = new Phaser.Game(config);
 
 let player;
+let platforms;
 let cursors;
 
 
 function preload() {
   this.load.atlas("player", Hero, Atlas);
+  this.load.image("ground", GroundImg);
+  this.load.image("platform", PlatformImg);
 }
 
 function create() {
 
+  // Create player
   player = this.add.sprite(100, 300, "player", "Idle/0001.png" );
+  
+  // Create Platforms
+  platforms = this.physics.add.staticGroup();
+  platforms.create(400, 568, 'ground').setScale(2).refreshBody();
 
+  platforms.create()
 
+  // Create Animations
   this.anims.create({
     key: "idle",
     frameRate: 4,
@@ -39,7 +58,7 @@ function create() {
       end: 5,
       zeroPad: 4,
     }),
-  })
+  });
 
   this.anims.create({
     key: "right",
