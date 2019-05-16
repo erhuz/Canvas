@@ -1,3 +1,5 @@
+'use strict';
+
 import Phaser from "phaser";
 import Hero from "./assets/Characters/player/player.png";
 import Atlas from "./assets/Characters/player/player.json";
