@@ -72,7 +72,7 @@ function create() {
   });
 
   this.anims.create({
-    key: 'right',
+    key: 'walkRight',
     frameRate: 10,
     repeat: -1,
     frames: this.anims.generateFrameNames('player', {
@@ -80,6 +80,19 @@ function create() {
       suffix: '.png',
       start: 1,
       end: 5,
+      zeroPad: 4,
+    }),
+  });
+
+  this.anims.create({
+    key: 'walkLeft',
+    frameRate: 10,
+    repeat: -1,
+    frames: this.anims.generateFrameNames('player', {
+      prefix: 'Walk/',
+      suffix: '.png',
+      start: 6,
+      end: 10,
       zeroPad: 4,
     }),
   });
@@ -128,11 +141,11 @@ function create() {
 function update() {
   if (cursors.right.isDown) {
     player.setVelocityX(160);
-    player.anims.play('right', true);
+    player.anims.play('walkRight', true);
   }
   else if (cursors.left.isDown) {
     player.setVelocityX(-160);
-    player.anims.play('left', true);
+    player.anims.play('walkLeft', true);
   }
   else if (cursors.up.isDown) {
     player.setVelocityY(-330);
