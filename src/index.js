@@ -26,6 +26,7 @@ const config = {
   }
 };
 const game = new Phaser.Game(config);
+let camera;
 
 let player;
 let platforms;
@@ -41,7 +42,7 @@ function preload() {
 
 function create() {
 
-
+  camera = scene.cameras.main;
 
   // Create background
   this.add.image(250, 260, 'background-5').setScale(3.5);
