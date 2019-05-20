@@ -13,11 +13,11 @@ const config = {
   width: 800,
   height: 600,
   physics: {
-      default: 'arcade',
-      arcade: {
-          gravity: { y: 300 },
-          debug: false
-      }
+    default: 'arcade',
+    arcade: {
+      gravity: { y: 300 },
+      debug: false
+    }
   },
   scene: {
     preload: preload,
@@ -41,17 +41,21 @@ function preload() {
 
 function create() {
 
+
+
   // Create background
-  this.add.image(250,260,'background-5').setScale(3.5);
+  this.add.image(250, 260, 'background-5').setScale(3.5);
 
   // Create player
-  player = this.add.sprite(100, 300, 'player', 'Idle/0001.png' );
-  
+  player = this.physics.add.sprite(100, 300, 'player', 'Idle/0001.png');
+  player.setCollideWorldBounds(true);
+
   // Create Platforms
   platforms = this.physics.add.staticGroup();
   platforms.create(400, 568, 'ground').setScale(2).refreshBody();
 
   platforms.create(250, 400, 'platform');
+  this.physics.add.collider(player, platforms);
 
   // Create Animations
   this.anims.create({
@@ -118,21 +122,25 @@ function create() {
       zeroPad: 4,
     }),
   });
-cursors = this.input.keyboard.createCursorKeys();
+  cursors = this.input.keyboard.createCursorKeys();
 }
 
 function update() {
   if (cursors.right.isDown) {
+    player.setVelocityX(160);
     player.anims.play('right', true);
   }
   else if (cursors.left.isDown) {
+    player.setVelocityX(-160);
     player.anims.play('left', true);
   }
   else if (cursors.up.isDown) {
+    player.setVelocityY(-330);
     player.anims.play('jump', true)
   }
   else {
+    player.setVelocityX(0);
     player.anims.play('idle', true)
   }
-  
+
 }
