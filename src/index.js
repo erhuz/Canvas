@@ -2,10 +2,11 @@
 
 import Phaser from 'phaser';
 import Hero from './assets/Characters/player/player.png';
-import Atlas from './assets/Characters/player/player.json';
+import HeroAtlas from './assets/Characters/player/player.json';
 import PlatformImg from './assets/World/Platforms/platform.png';
 import GroundImg from './assets/World/Platforms/ground.png';
 import Background5 from './assets/World/Background/parallax-mountain-bg.png';
+import ObstacleC from './assets/World/Obstacles/Spikes/spikeC.png'
 
 const config = {
   type: Phaser.AUTO,
@@ -30,18 +31,20 @@ const game = new Phaser.Game(config);
 let player;
 let platforms;
 let cursors;
+let obstacles;
+let playerDmg = false;
 
 
 function preload() {
   this.load.image('background-5', Background5);
-  this.load.atlas('player', Hero, Atlas);
+  this.load.atlas('player', Hero, HeroAtlas);
   this.load.image('ground', GroundImg);
   this.load.image('platform', PlatformImg);
+  this.load.image('obstacle', ObstacleC);
 }
 
 function create() {
 
-  
   // Create background
   this.add.image(250, 260, 'background-5').setScale(3.5);
 
@@ -55,7 +58,14 @@ function create() {
   platforms.create(400, 568, 'ground').setScale(2).refreshBody();
 
   platforms.create(250, 400, 'platform');
-  this.physics.add.collider(player, platforms);
+  this.physics.add.collider(player, platforms, obstacles);
+
+  // Create Dangerous Obstacles
+  obstacles = this.physics.add.staticGroup();
+
+  obstacles.create(250, 390, 'obstacle').setScale(1.5);
+  this.physics.add.collider(platforms, obstacles);
+  this.physics.add.collider(player, obstacles, hitObstacles, null, this);
 
   // Create Animations
   this.anims.create({
@@ -127,22 +137,48 @@ function create() {
 
 function update() {
 
-  // Player movement
-  if (cursors.right.isDown) {
-    player.setVelocityX(160);
-    player.anims.play('right', true);
+  if (playerDmg !== true) 
+  {
+    // Player Controlls
+    if (cursors.right.isDown) 
+    {
+      player.setVelocityX(160);
+      player.anims.play('right', true);
+    }
+    else if (cursors.left.isDown) 
+    {
+      player.setVelocityX(-160);
+      player.anims.play('left', true);
+    }
+    else if (cursors.up.isDown) 
+    {
+      player.setVelocityY(-330);
+      player.anims.play('jump', true)
+    }
+    else 
+    {
+      player.setVelocityX(0);
+      player.anims.play('idle', true)
+    }
   }
-  else if (cursors.left.isDown) {
-    player.setVelocityX(-160);
-    player.anims.play('left', true);
+  // If player get damaged
+  else 
+  {
+    setTimeout(function () 
+    {
+      player.setVelocityY(-140);
+      player.setTint();
+      playerDmg = false;
+    }, 500);
+    player.setTint(0xff0000);
+    player.anims.play('hurt', true);
   }
-  else if (cursors.up.isDown) {
-    player.setVelocityY(-330);
-    player.anims.play('jump', true)
-  }
-  else {
-    player.setVelocityX(0);
-    player.anims.play('idle', true)
+}
+function hitObstacles(player) 
+{
+  if (playerDmg !== true) 
+  {
+    playerDmg = true;
   }
 
 }
