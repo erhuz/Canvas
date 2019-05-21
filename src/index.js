@@ -170,36 +170,33 @@ function update() {
 
   if (cursors.right.isDown) {
     player.setVelocityX(60);
-    if (facing != 'right') {
-      player.anims.play('walkRight', true);
+    player.anims.play('walkRight', true);
+
       facing = 'right';
-    }
 
   }
   else if (cursors.left.isDown) {
     player.setVelocityX(-60);
-    if (facing != 'left') {
+
       player.anims.play('walkLeft', true);
       facing = 'left';
-    }
 
   }
   else {
-      if (facing == 'left') {
-        player.anims.play('idleLeft', true)
-      }
-      else {
-        player.anims.play('idleRight', true)
-      }
-  }
-  if (cursors.up.isDown && player.body.touching.down) {
-    player.setVelocityY(-220);
     if (facing == 'left') {
-      player.anims.play('jumpLeft', true)
+      player.anims.play('idleLeft', true)
     }
     else {
-      player.anims.play('jumpRight', true)
+      player.anims.play('idleRight', true)
     }
   }
-
+  if (cursors.up.isDown && player.body.touching.down) {
+    player.setVelocityY(-320);
+    if (facing == 'left') {
+      // player.anims.play('jumpLeft', true)
+    }
+    else {
+      // player.anims.play('jumpRight', true)
+    }
+  }
 }
