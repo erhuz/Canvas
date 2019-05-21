@@ -42,14 +42,14 @@ function preload() {
 
 function create() {
 
-
-
+  
   // Create background
   this.add.image(250, 260, 'background-5').setScale(3.5);
 
   // Create player
   player = this.physics.add.sprite(100, 300, 'player', 'Idle/0001.png');
   player.setCollideWorldBounds(true);
+  this.cameras.main.startFollow(player, true, 0.08, 0.1);
 
   // Create Platforms
   platforms = this.physics.add.staticGroup();
@@ -168,6 +168,8 @@ function create() {
 function update() {
   player.setVelocityX(0);
 
+
+  // Player movement
   if (cursors.right.isDown) {
     player.setVelocityX(60);
     player.anims.play('walkRight', true);
