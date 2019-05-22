@@ -33,7 +33,9 @@ var facing = 'right';
 let platforms;
 let cursors;
 let obstacles;
-let playerDmg = false;
+let playerDmg;
+let playerHealth;
+let playerPoints;
 
 
 function preload() {
@@ -53,6 +55,11 @@ function create() {
   player = this.physics.add.sprite(100, 300, 'player', 'Idle/0001.png');
   player.setCollideWorldBounds(true);
   this.cameras.main.startFollow(player, true, 0.08, 0.1);
+
+  // Set Player-related variables
+  playerDmg = false;
+  playerHealth = 100;
+  playerPoints = 0;
 
   // Create Platforms
   platforms = this.physics.add.staticGroup();
