@@ -2,10 +2,11 @@
 
 import Phaser from 'phaser';
 import Hero from './assets/Characters/player/player.png';
-import Atlas from './assets/Characters/player/player.json';
+import HeroAtlas from './assets/Characters/player/player.json';
 import PlatformImg from './assets/World/Platforms/platform.png';
 import GroundImg from './assets/World/Platforms/ground.png';
 import Background5 from './assets/World/Background/parallax-mountain-bg.png';
+import ObstacleC from './assets/World/Obstacles/Spikes/spikeC.png'
 
 const config = {
   type: Phaser.AUTO,
@@ -31,18 +32,20 @@ let player;
 var facing = 'right';
 let platforms;
 let cursors;
+let obstacles;
+let playerDmg = false;
 
 
 function preload() {
   this.load.image('background-5', Background5);
-  this.load.atlas('player', Hero, Atlas);
+  this.load.atlas('player', Hero, HeroAtlas);
   this.load.image('ground', GroundImg);
   this.load.image('platform', PlatformImg);
+  this.load.image('obstacle', ObstacleC);
 }
 
 function create() {
 
-  
   // Create background
   this.add.image(250, 260, 'background-5').setScale(3.5);
 
@@ -67,11 +70,18 @@ function create() {
   platforms.create(800, 250, 'platform').setScale(.5, 1).refreshBody();
   platforms.create(950, 380, 'platform').setScale(.4, 1).refreshBody();
   
-  this.physics.add.collider(player, platforms);
+  this.physics.add.collider(player, platforms, obstacles);
+
+  // Create Dangerous Obstacles
+  obstacles = this.physics.add.staticGroup();
+
+  obstacles.create(250, 390, 'obstacle').setScale(1.5);
+  this.physics.add.collider(platforms, obstacles);
+  this.physics.add.collider(player, obstacles, hitObstacles, null, this);
+
   /*======================
         /CREATE WORLD
   ========================*/
-
 
   // Create Animations
   this.anims.create({
@@ -183,37 +193,65 @@ function create() {
 function update() {
   player.setVelocityX(0);
 
-
-  // Player movement
-  if (cursors.right.isDown) {
-    player.setVelocityX(60);
-    player.anims.play('walkRight', true);
-
+  if (playerDmg !== true) {
+    
+    // Player movement
+    if (cursors.right.isDown) 
+    {
+      player.setVelocityX(160);
+      player.anims.play('walkRight', true);
       facing = 'right';
-
-  }
-  else if (cursors.left.isDown) {
-    player.setVelocityX(-60);
-
+    }
+    else if (cursors.left.isDown) 
+    {
+      player.setVelocityX(-160);
+      
       player.anims.play('walkLeft', true);
       facing = 'left';
-
+      
+    }
+    else 
+    {
+      if (facing == 'left') 
+      {
+        player.anims.play('idleLeft', true)
+      }
+      else 
+      {
+        player.anims.play('idleRight', true)
+      }
+    }
+    if (cursors.up.isDown && player.body.touching.down) 
+    {
+      player.setVelocityY(-320);
+      
+      if (facing == 'left') 
+      {
+        // player.anims.play('jumpLeft', true)
+      }
+      else 
+      {
+        // player.anims.play('jumpRight', true)
+      }
+    }
   }
-  else {
-    if (facing == 'left') {
-      player.anims.play('idleLeft', true)
-    }
-    else {
-      player.anims.play('idleRight', true)
-    }
-  }
-  if (cursors.up.isDown && player.body.touching.down) {
-    player.setVelocityY(-320);
-    if (facing == 'left') {
-      // player.anims.play('jumpLeft', true)
-    }
-    else {
-      // player.anims.play('jumpRight', true)
-    }
+  else 
+  {
+    setTimeout(function () 
+    {
+      player.setVelocityY(-140);
+      player.setTint();
+      playerDmg = false;
+    }, 500);
+    player.setTint(0xff0000);
+    player.anims.play('hurt', true);
   }
 }
+function hitObstacles(player) 
+{
+  if (playerDmg !== true) 
+  {
+    playerDmg = true;
+  }
+}
+  
