@@ -261,6 +261,13 @@ function update() {
   }
 }
 
+function addPointsToPlayer(points){
+  playerPoints += points;
+
+  console.log(`Player's points increased by: ${points}`);
+  console.log(`${(playerPoints + points)} => ${playerPoints}`);
+}
+
 function damagePlayer(damage){
   if(playerBeingDamaged !== true){
     playerHealth -= damage;
