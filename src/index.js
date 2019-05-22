@@ -28,6 +28,7 @@ const config = {
 const game = new Phaser.Game(config);
 
 let player;
+var facing = 'right';
 let platforms;
 let cursors;
 
@@ -74,7 +75,7 @@ function create() {
 
   // Create Animations
   this.anims.create({
-    key: 'idle',
+    key: 'idleRight',
     frameRate: 4,
     repeat: -1,
     frames: this.anims.generateFrameNames('player', {
@@ -87,7 +88,20 @@ function create() {
   });
 
   this.anims.create({
-    key: 'right',
+    key: 'idleLeft',
+    frameRate: 4,
+    repeat: -1,
+    frames: this.anims.generateFrameNames('player', {
+      prefix: 'Idle/',
+      suffix: '.png',
+      start: 6,
+      end: 10,
+      zeroPad: 4,
+    }),
+  });
+
+  this.anims.create({
+    key: 'walkRight',
     frameRate: 10,
     repeat: -1,
     frames: this.anims.generateFrameNames('player', {
@@ -100,7 +114,20 @@ function create() {
   });
 
   this.anims.create({
-    key: 'jump',
+    key: 'walkLeft',
+    frameRate: 10,
+    repeat: -1,
+    frames: this.anims.generateFrameNames('player', {
+      prefix: 'Walk/',
+      suffix: '.png',
+      start: 6,
+      end: 10,
+      zeroPad: 4,
+    }),
+  });
+
+  this.anims.create({
+    key: 'jumpRight',
     frameRate: 5,
     repeat: -1,
     frames: this.anims.generateFrameNames('player', {
@@ -108,6 +135,19 @@ function create() {
       suffix: '.png',
       start: 1,
       end: 5,
+      zeroPad: 4,
+    }),
+  });
+
+  this.anims.create({
+    key: 'jumpLeft',
+    frameRate: 5,
+    repeat: -1,
+    frames: this.anims.generateFrameNames('player', {
+      prefix: 'Jump/',
+      suffix: '.png',
+      start: 6,
+      end: 10,
       zeroPad: 4,
     }),
   });
@@ -141,23 +181,39 @@ function create() {
 }
 
 function update() {
+  player.setVelocityX(0);
+
 
   // Player movement
   if (cursors.right.isDown) {
-    player.setVelocityX(160);
-    player.anims.play('right', true);
+    player.setVelocityX(60);
+    player.anims.play('walkRight', true);
+
+      facing = 'right';
+
   }
   else if (cursors.left.isDown) {
-    player.setVelocityX(-160);
-    player.anims.play('left', true);
-  }
-  else if (cursors.up.isDown) {
-    player.setVelocityY(-330);
-    player.anims.play('jump', true)
+    player.setVelocityX(-60);
+
+      player.anims.play('walkLeft', true);
+      facing = 'left';
+
   }
   else {
-    player.setVelocityX(0);
-    player.anims.play('idle', true)
+    if (facing == 'left') {
+      player.anims.play('idleLeft', true)
+    }
+    else {
+      player.anims.play('idleRight', true)
+    }
   }
-
+  if (cursors.up.isDown && player.body.touching.down) {
+    player.setVelocityY(-320);
+    if (facing == 'left') {
+      // player.anims.play('jumpLeft', true)
+    }
+    else {
+      // player.anims.play('jumpRight', true)
+    }
+  }
 }
