@@ -52,7 +52,7 @@ function create() {
   this.cameras.main.startFollow(player, true, 0.08, 0.1);
   
   // Set world Bounds
-  this.physics.world.setBounds(-220, -64, 3392, 600); // Bounds expand downwards, counter that by moving Y accordingly
+  this.physics.world.setBounds(-220, -60, 3392, 600); // Bounds expand downwards, counter that by moving Y accordingly
   
   
   /*======================
