@@ -61,11 +61,24 @@ function create() {
   playerHealth = 100;
   playerPoints = 0;
 
-  // Create Platforms
+  
+  // Set world Bounds
+  this.physics.world.setBounds(-220, -60, 3392, 600); // Bounds expand downwards, counter that by moving Y accordingly
+  
+  
+  /*======================
+        CREATE WORLD
+  ========================*/
   platforms = this.physics.add.staticGroup();
-  platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+  
+  // Create Platforms
+  platforms.create(1200, 568, 'ground').setScale(8, 2).refreshBody();
 
-  platforms.create(250, 400, 'platform');
+  platforms.create(250, 400, 'platform').setScale(.4, 1).refreshBody();
+  platforms.create(530, 300, 'platform').setScale(.4, 1).refreshBody();
+  platforms.create(800, 250, 'platform').setScale(.5, 1).refreshBody();
+  platforms.create(950, 380, 'platform').setScale(.4, 1).refreshBody();
+  
   this.physics.add.collider(player, platforms, obstacles);
 
   // Create Dangerous Obstacles
@@ -74,6 +87,10 @@ function create() {
   obstacles.create(250, 390, 'obstacle').setScale(1.5);
   this.physics.add.collider(platforms, obstacles);
   this.physics.add.collider(player, obstacles, hitObstacles, null, this);
+
+  /*======================
+        /CREATE WORLD
+  ========================*/
 
   // Create Animations
   this.anims.create({
