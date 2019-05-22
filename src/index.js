@@ -36,6 +36,7 @@ let obstacles;
 let playerDmg;
 let playerHealth;
 let playerPoints;
+let playerBeingDamaged;
 
 
 function preload() {
@@ -58,6 +59,7 @@ function create() {
 
   // Set Player-related variables
   playerDmg = false;
+  playerBeingDamaged = false;
   playerHealth = 100;
   playerPoints = 0;
 
@@ -251,11 +253,31 @@ function update() {
       player.setVelocityY(-140);
       player.setTint();
       playerDmg = false;
+      
     }, 500);
+    damagePlayer(10);  
     player.setTint(0xff0000);
     player.anims.play('hurt', true);
   }
 }
+
+function damagePlayer(damage){
+  if(playerBeingDamaged !== true){
+    playerHealth -= damage;
+  
+    // Debug logging
+    console.log(`Player's health reduces by: ${damage}`);
+    console.log(`${(playerHealth + damage)} => ${playerHealth}`);
+    
+    playerBeingDamaged = true;
+
+    setTimeout(function ()
+    {
+      playerBeingDamaged = false;
+    }, 500)
+  }
+}
+
 function hitObstacles(player) 
 {
   if (playerDmg !== true) 
