@@ -163,7 +163,7 @@ function create() {
   });
 
   this.anims.create({
-    key: 'hurt',
+    key: 'hurtRight',
     frameRate: 10,
     repeat: -1,
     frames: this.anims.generateFrameNames('player', {
@@ -171,6 +171,19 @@ function create() {
       suffix: '.png',
       start: 1,
       end: 5,
+      zeroPad: 4,
+    }),
+  });
+
+  this.anims.create({
+    key: 'hurtLeft',
+    frameRate: 10,
+    repeat: -1,
+    frames: this.anims.generateFrameNames('player', {
+      prefix: 'Hurt/',
+      suffix: '.png',
+      start: 6,
+      end: 10,
       zeroPad: 4,
     }),
   });
@@ -244,7 +257,16 @@ function update() {
       playerDmg = false;
     }, 500);
     player.setTint(0xff0000);
-    player.anims.play('hurt', true);
+    if (facing === 'right') 
+    {
+      player.anims.play('hurtRight', true);
+    }
+    else
+    {
+      player.anims.play('hurtLeft', true);
+
+    }
+
   }
 }
 function hitObstacles(player) 
