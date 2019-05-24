@@ -4,10 +4,11 @@ import Phaser from 'phaser';
 import Hero from './assets/Characters/player/player.png';
 import HeroAtlas from './assets/Characters/player/player.json';
 import PlatformImg from './assets/World/Platforms/platform.png';
+import RoofImg from './assets/World/Roofs/roof.png';
 import GroundImg from './assets/World/Platforms/ground.png';
 import Background5 from './assets/World/Background/parallax-mountain-bg.png';
 import ObstacleC from './assets/World/Obstacles/Spikes/spikeC.png'
-import wallImg from './assets/World/Walls/wall.png'
+import WallImg from './assets/World/Walls/wall.png'
 
 const config = {
   type: Phaser.AUTO,
@@ -30,8 +31,9 @@ const config = {
 const game = new Phaser.Game(config);
 
 let player;
-var facing = 'right';
+let facing = 'right';
 let platforms;
+let roofs
 let cursors;
 let obstacles;
 let walls
@@ -44,7 +46,8 @@ function preload() {
   this.load.image('ground', GroundImg);
   this.load.image('platform', PlatformImg);
   this.load.image('obstacle', ObstacleC);
-  this.load.image('wall', wallImg)
+  this.load.image('wall', WallImg)
+  this.load.image('roof', RoofImg)
 }
 
 function create() {
@@ -53,12 +56,12 @@ function create() {
   this.add.image(250, 260, 'background-5').setScale(3.5);
 
   // Create player
-  player = this.physics.add.sprite(0, 496, 'player', 'Idle/0001.png');
+  player = this.physics.add.sprite(100, 496, 'player', 'Idle/0001.png');
   player.setCollideWorldBounds(true);
   this.cameras.main.startFollow(player, true, 0.08, 0.1);
   
   // Set world Bounds
-  this.physics.world.setBounds(-220, -60, 3392, 600); // Bounds expand downwards, counter that by moving Y accordingly
+  this.physics.world.setBounds(-220, -60, 30392, 6000); // Bounds expand downwards, counter that by moving Y accordingly
   
   
   /*======================
@@ -66,24 +69,38 @@ function create() {
   ========================*/
   platforms = this.physics.add.staticGroup();
   walls = this.physics.add.staticGroup();
- 
-  platforms.create(1200, 568, 'ground').setScale(8, 2).refreshBody();
-  walls.create(150, 385, 'wall').setScale(.4, 1).refreshBody();
-
-
-  platforms.create(250, 400, 'platform').setScale(.5).refreshBody();
-  platforms.create(530, 300, 'platform').setScale(.5).refreshBody();
-  platforms.create(800, 250, 'platform').setScale(.5).refreshBody();
-  platforms.create(950, 380, 'platform').setScale(.4).refreshBody();
-  
-  this.physics.add.collider(player, platforms, obstacles);
-
-  // Create Dangerous Obstacles
   obstacles = this.physics.add.staticGroup();
+  roofs = this.physics.add.staticGroup();
 
-  obstacles.create(250, 390, 'obstacle').setScale(1.5);
-  this.physics.add.collider(platforms, obstacles);
+  //Ground
+  platforms.create(1200, 568, 'ground').setScale(8, 2).refreshBody();
+
+  // Roof
+  roofs.create(50, 0, 'platform').setScale(1, .4).refreshBody();
+  roofs.create(350, 0, 'platform').setScale(1, .4).refreshBody();
+
+  // Walls
+  walls.create(0, 472, 'wall').setScale(.4, .42).refreshBody();
+  walls.create(180, 385, 'wall').setScale(.4, 1).refreshBody();
+  walls.create(0, 250, 'wall').setScale(.4, 1).refreshBody();
+
+  // Platforms
+  platforms.create(30, 400, 'platform').setScale(.3).refreshBody();
+  platforms.create(150, 240, 'platform').setScale(.3).refreshBody();
+
+  platforms.create(950, 380, 'platform').setScale(.4).refreshBody();
+  platforms.create(314, 390, 'platform').setScale(1, .4).refreshBody();
+  
+  
+  // Dangerous Obstacles
+  obstacles.create(310, 365, 'obstacle');
+  obstacles.create(339, 365, 'obstacle');
+
+  // Colliders
   this.physics.add.collider(player, obstacles, hitObstacles, null, this);
+  this.physics.add.collider(player, platforms);
+  this.physics.add.collider(player, walls);
+  this.physics.add.collider(player, roofs);
 
   /*======================
         /CREATE WORLD
@@ -258,7 +275,7 @@ function update() {
   {
     setTimeout(function () 
     {
-      player.setVelocityY(-140);
+      player.setVelocityY(-240);
       player.setTint();
       playerDmg = false;
     }, 500);
