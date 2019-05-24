@@ -57,7 +57,8 @@ function create() {
 
   // Create player
   // player = this.physics.add.sprite(100, 496, 'player', 'Idle/0001.png').setScale(.7);
-  player = this.physics.add.sprite(700, 96, 'player', 'Idle/0001.png').setScale(.7);
+  player = this.physics.add.sprite(2072, 80, 'player', 'Idle/0001.png').setScale(.7);
+
   player.setCollideWorldBounds(true);
   this.cameras.main.startFollow(player, true, 0.08, 0.1);
 
@@ -76,7 +77,7 @@ function create() {
   /*======================
           GROUND
   ========================*/
-  platforms.create(1200, 568, 'ground').setScale(8, 2).refreshBody();
+  platforms.create(1200, 695, 'ground').setScale(8, 10).refreshBody();
 
   /*======================
           ROOFS
@@ -85,32 +86,26 @@ function create() {
   roofs.create(350, 0, 'platform').setScale(1, .4).refreshBody();
   roofs.create(650, 0, 'platform').setScale(1, .4).refreshBody();
   roofs.create(950, 0, 'platform').setScale(1, .4).refreshBody();
+  roofs.create(1250, 0, 'platform').setScale(1, .4).refreshBody();
+  roofs.create(1550, 0, 'platform').setScale(1, .4).refreshBody();
+  roofs.create(1850, 0, 'platform').setScale(1, .4).refreshBody();
+  roofs.create(2150, 0, 'platform').setScale(1, .4).refreshBody();
+  roofs.create(2450, 0, 'platform').setScale(1, .4).refreshBody();
+  roofs.create(2450, 0, 'platform').setScale(1, .4).refreshBody();
+  roofs.create(2650, 0, 'platform').setScale(.8, .4).refreshBody();
 
   /*======================
-      WALLS
+          FIRST ROOM
   ========================*/
+
+  platforms.create(150, 400, 'platform').setScale(.3).refreshBody();
+  platforms.create(30, 240, 'platform').setScale(.3).refreshBody();
+
   walls.create(0, 385, 'wall').setScale(.4, 1).refreshBody();
   walls.create(0, 110, 'wall').setScale(.4, .8).refreshBody();
   walls.create(180, 385, 'wall').setScale(.4, 1).refreshBody();
   walls.create(180, 185, 'wall').setScale(.4, .5).refreshBody();
-  walls.create(745, 385, 'wall').setScale(.4, .5).refreshBody();
-  walls.create(745, 85, 'wall').setScale(.4, .5).refreshBody();
 
-  /*======================
-      PLATFORMS
-  ========================*/
-  platforms.create(150, 400, 'platform').setScale(.3).refreshBody();
-  platforms.create(30, 240, 'platform').setScale(.3).refreshBody();
-  platforms.create(314, 390, 'platform').setScale(1, .4).refreshBody();
-  platforms.create(610, 390, 'platform').setScale(1, .4).refreshBody();
-  platforms.create(500, 150, 'platform').setScale(1, .4).refreshBody();
-  platforms.create(610, 150, 'platform').setScale(1, .4).refreshBody();
-
-  /*======================
-      DANGEROUS OBSTACLES
-  ========================*/
-
-  // FIRST PLATFORM
   obstacles.create(220, 365, 'obstacle');
   obstacles.create(249, 365, 'obstacle');
   obstacles.create(278, 365, 'obstacle');
@@ -124,6 +119,49 @@ function create() {
   obstacles.create(679, 365, 'obstacle');
   obstacles.create(708, 365, 'obstacle');
 
+  /*======================
+  SECOND ROOM 
+  ========================*/
+
+  platforms.create(314, 390, 'platform').setScale(1, .4).refreshBody();
+  platforms.create(610, 390, 'platform').setScale(1, .4).refreshBody();
+  platforms.create(500, 150, 'platform').setScale(1, .4).refreshBody();
+  platforms.create(610, 150, 'platform').setScale(1, .4).refreshBody();
+
+  walls.create(745, 385, 'wall').setScale(.4, .5).refreshBody();
+  walls.create(745, 85, 'wall').setScale(.4, .5).refreshBody();
+
+  /*======================
+  THIRD ROOM
+  ========================*/
+
+  platforms.create(1080, 310, 'platform').setScale(1, .4).refreshBody();
+  platforms.create(910, 150, 'platform').setScale(1, .4).refreshBody();
+  platforms.create(1210, 450, 'platform').setScale(1, .4).refreshBody();
+  platforms.create(1510, 310, 'platform').setScale(1, .4).refreshBody();
+  platforms.create(1300, 150, 'platform').setScale(.3).refreshBody();
+
+  walls.create(1245, 155, 'wall').setScale(.4, 1.13).refreshBody();
+  walls.create(1445, 155, 'wall').setScale(.4, 1.13).refreshBody();
+  walls.create(1345, 500, 'wall').setScale(.4, .25).refreshBody();
+
+  /*======================
+  FOURTH ROOM
+  ========================*/
+  platforms.create(1530, 470, 'platform').setScale(.3).refreshBody();
+  platforms.create(1730, 470, 'platform').setScale(.3).refreshBody();
+  platforms.create(2065, 470, 'platform').setScale(.3).refreshBody();
+  platforms.create(2265, 310, 'platform').setScale(.3).refreshBody();
+  platforms.create(2600, 470, 'platform').setScale(.3).refreshBody();
+  platforms.create(2730, 310, 'platform').setScale(.3).refreshBody();
+  platforms.create(2630, 150, 'platform').setScale(.3).refreshBody();
+  platforms.create(2372, 90, 'platform').setScale(1, .3).refreshBody();
+  platforms.create(2072, 120, 'platform').setScale(1, .3).refreshBody();
+  platforms.create(1748, 220, 'platform').setScale(.3).refreshBody();
+
+  walls.create(1650, 235, 'wall').setScale(.4, .6).refreshBody();
+  walls.create(2785, 385, 'wall').setScale(.4, 1).refreshBody();
+  walls.create(2785, 135, 'wall').setScale(.4, 1).refreshBody();
 
   /*======================
         COLLIDERS
@@ -256,6 +294,10 @@ function create() {
       zeroPad: 4,
     }),
   });
+  /*======================
+  /CREATE CHARACTER ANIMATION
+  ========================*/
+
   // CREATE CONTROLL KEYS
   cursors = this.input.keyboard.createCursorKeys();
 }
