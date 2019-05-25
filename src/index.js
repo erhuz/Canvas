@@ -35,6 +35,7 @@ let platforms;
 let cursors;
 let obstacles;
 let playerDmg = false;
+let stars;
 
 
 function preload() {
@@ -43,6 +44,7 @@ function preload() {
   this.load.image('ground', GroundImg);
   this.load.image('platform', PlatformImg);
   this.load.image('obstacle', ObstacleC);
+  this.load.image('star', Star);
 }
 
 function create() {
