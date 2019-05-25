@@ -417,3 +417,7 @@ function hitObstacles(player) {
     playerDmg = true;
   }
 }
+
+function gameWin(){
+  // Win Game
+}
