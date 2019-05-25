@@ -7,8 +7,9 @@ import PlatformImg from './assets/World/Platforms/platform.png';
 import RoofImg from './assets/World/Roofs/roof.png';
 import GroundImg from './assets/World/Platforms/ground.png';
 import Background5 from './assets/World/Background/parallax-mountain-bg.png';
+import Star from './assets/World/Collectibles/star.png';
 import Spikes from './assets/World/Obstacles/Spikes/spikeC.png'
-import FullRoomSpikes from './assets/World/Obstacles/Spikes/FullRoomSpikes.png'
+import FullRoomSpikes from './assets/World/Obstacles/Spikes/fullRoomSpikes.png'
 import WallImg from './assets/World/Walls/wall.png'
 
 const config = {
@@ -36,9 +37,13 @@ let facing = 'right';
 let platforms;
 let roofs
 let cursors;
+let playerDmg;
+let playerHealth;
+let playerPoints;
+let playerBeingDamaged;
 let spikes;
 let walls
-let playerDmg = false;
+let stars;
 
 
 function preload() {
@@ -50,6 +55,7 @@ function preload() {
   this.load.atlas('player', Hero, HeroAtlas);
   this.load.image('ground', GroundImg);
   this.load.image('platform', PlatformImg);
+  this.load.image('star', Star);
   this.load.image('spikes', Spikes);
   this.load.image('full-room-spikes', FullRoomSpikes);
   this.load.image('wall', WallImg)
@@ -68,6 +74,13 @@ function create() {
   player.setCollideWorldBounds(true);
   this.cameras.main.startFollow(player, true, 0.08, 0.1);
 
+  // Set Player-related variables
+  playerDmg = false;
+  playerBeingDamaged = false;
+  playerHealth = 100;
+  playerPoints = 0;
+
+  
   // WORLD BOUNDRIES
   this.physics.world.setBounds(-220, -60, 30392, 6000); // Bounds expand downwards, counter that by moving Y accordingly
 
@@ -79,6 +92,7 @@ function create() {
   walls = this.physics.add.staticGroup();
   spikes = this.physics.add.staticGroup();
   roofs = this.physics.add.staticGroup();
+  stars = this.physics.add.staticGroup();
 
   /*======================
           GROUND
@@ -186,6 +200,16 @@ function create() {
   spikes.create(2755, 522, 'spikes');
 
   /*======================
+        COLLECTIBLES
+  ========================*/
+
+  stars = this.physics.add.group({
+    key: 'star',
+    repeat: 14,
+    setXY: { x: 40, y: 200, stepX: 185 }
+  });
+
+  /*======================
         COLLIDERS
   ========================*/
 
@@ -193,6 +217,15 @@ function create() {
   this.physics.add.collider(player, platforms);
   this.physics.add.collider(player, walls);
   this.physics.add.collider(player, roofs);
+  this.physics.add.collider(stars, platforms);
+  this.physics.add.collider(stars, spikes);
+
+  /*======================
+        OVERLAPS
+  ========================*/
+
+  this.physics.add.overlap(player, stars, hitStar, null, this);  
+
   /*======================
         /CREATE WORLD
   ========================*/
@@ -370,9 +403,9 @@ function update() {
       player.setVelocityY(-240);
       player.setTint();
       playerDmg = false;
-
+      
     }, 500);
-
+    damagePlayer(10);  
     player.setTint(0xff0000);
 
     if (facing === 'right') {
@@ -385,8 +418,45 @@ function update() {
   }
 }
 
+function addPointsToPlayer(points){
+  playerPoints += points;
+
+  console.log(`Points: ${(playerPoints - points)} => ${playerPoints}`);
+}
+
+function damagePlayer(damage){
+  if(playerBeingDamaged !== true){
+    playerHealth -= damage;
+  
+    // Debug logging
+    console.log(`Health: ${(playerHealth + damage)} => ${playerHealth}`);
+    
+    playerBeingDamaged = true;
+
+    setTimeout(function ()
+    {
+      playerBeingDamaged = false;
+    }, 500)
+  }
+}
+
+
+function hitStar (player,  star){
+  star.disableBody(true, true);
+  
+  addPointsToPlayer(100);
+
+  if(stars.countActive(true) === 0){
+    gameWin();
+  }
+}
+
 function hitObstacles(player) {
   if (playerDmg !== true) {
     playerDmg = true;
   }
+}
+
+function gameWin(){
+  // Win Game
 }
