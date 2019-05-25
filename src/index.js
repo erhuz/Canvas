@@ -82,6 +82,7 @@ function create() {
   walls = this.physics.add.staticGroup();
   spikes = this.physics.add.staticGroup();
   roofs = this.physics.add.staticGroup();
+  stars = this.physics.add.staticGroup();
 
   /*======================
           GROUND
@@ -189,6 +190,16 @@ function create() {
   spikes.create(2755, 522, 'spikes');
 
   /*======================
+        COLLECTIBLES
+  ========================*/
+
+  stars = this.physics.add.group({
+    key: 'star',
+    repeat: 15,
+    setXY: { x: 40, y: 200, stepX: 185 }
+  });
+
+  /*======================
         COLLIDERS
   ========================*/
 
@@ -196,6 +207,9 @@ function create() {
   this.physics.add.collider(player, platforms);
   this.physics.add.collider(player, walls);
   this.physics.add.collider(player, roofs);
+  this.physics.add.collider(stars, platforms);
+  this.physics.add.collider(stars, spikes);
+
   /*======================
         /CREATE WORLD
   ========================*/
@@ -385,6 +399,16 @@ function update() {
       player.anims.play('hurtLeft', true);
     }
 
+  }
+}
+
+function hitStar (player,  star){
+  star.disableBody(true, true);
+
+  score += 100;
+
+  if(stars.countActive(true) === 0){
+    gameWin();
   }
 }
 
