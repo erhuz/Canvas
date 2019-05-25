@@ -9,7 +9,7 @@ import GroundImg from './assets/World/Platforms/ground.png';
 import Background5 from './assets/World/Background/parallax-mountain-bg.png';
 import Star from './assets/World/Collectibles/star.png';
 import Spikes from './assets/World/Obstacles/Spikes/spikeC.png'
-import FullRoomSpikes from './assets/World/Obstacles/Spikes/FullRoomSpikes.png'
+import FullRoomSpikes from './assets/World/Obstacles/Spikes/fullRoomSpikes.png'
 import WallImg from './assets/World/Walls/wall.png'
 
 const config = {
