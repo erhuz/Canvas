@@ -195,7 +195,7 @@ function create() {
 
   stars = this.physics.add.group({
     key: 'star',
-    repeat: 15,
+    repeat: 14,
     setXY: { x: 40, y: 200, stepX: 185 }
   });
 
@@ -410,7 +410,7 @@ function update() {
 
 function hitStar (player,  star){
   star.disableBody(true, true);
-
+  
 
   if(stars.countActive(true) === 0){
     gameWin();
