@@ -211,6 +211,12 @@ function create() {
   this.physics.add.collider(stars, spikes);
 
   /*======================
+        OVERLAPS
+  ========================*/
+
+  this.physics.add.overlap(player, stars, hitStar, null, this);  
+
+  /*======================
         /CREATE WORLD
   ========================*/
 
@@ -405,7 +411,6 @@ function update() {
 function hitStar (player,  star){
   star.disableBody(true, true);
 
-  score += 100;
 
   if(stars.countActive(true) === 0){
     gameWin();
