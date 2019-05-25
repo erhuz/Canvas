@@ -7,7 +7,7 @@ import PlatformImg from './assets/World/Platforms/platform.png';
 import GroundImg from './assets/World/Platforms/ground.png';
 import Background5 from './assets/World/Background/parallax-mountain-bg.png';
 import ObstacleC from './assets/World/Obstacles/Spikes/spikeC.png';
-import Stars from './assets/World/Collectibles/star.png';
+import Star from './assets/World/Collectibles/star.png';
 
 const config = {
   type: Phaser.AUTO,
