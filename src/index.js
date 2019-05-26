@@ -246,6 +246,8 @@ function create() {
   healthText.setScrollFactor(0);
   winText = this.add.text(250, 350, '', { fontSize: '64px', fill: '#000' });
   winText.setScrollFactor(0);
+  deathText = this.add.text(250, 350, '', { fontSize: '64px', fill: '#000' });
+  deathText.setScrollFactor(0);
 
   /*======================
   CREATE CHARACTER ANIMATION
@@ -449,6 +451,9 @@ function damagePlayer(damage){
 
     healthText.setText('Health: ' + playerHealth);
 
+    if(playerHealth <= 0){
+      gameOver();
+    }
 
     // Debug logging
     console.log(`Health: ${(playerHealth + damage)} => ${playerHealth}`);
@@ -481,4 +486,8 @@ function hitObstacles(player) {
 
 function gameWin(){
   winText.setText('You Won!');
+}
+
+function gameOver(){
+  deathText.setText('You Died!');
 }
