@@ -46,6 +46,7 @@ let pointsText;
 let spikes;
 let walls
 let stars;
+let background;
 
 
 function preload() {
@@ -67,8 +68,9 @@ function preload() {
 function create() {
 
   // BACKGROUND PICTURE
-  this.add.image(250, 260, 'background-5').setScale(3.5);
-  
+  background = this.add.image(350, 300, 'background-5').setScale(4);
+  background.setScrollFactor(0);
+
   // CREATE PLAYER
   player = this.physics.add.sprite(100, 496, 'player', 'Idle/0001.png').setScale(.7);
   // player = this.physics.add.sprite(1748, 180, 'player', 'Idle/0001.png').setScale(.7);
