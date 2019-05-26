@@ -44,6 +44,8 @@ let playerBeingDamaged;
 let spikes;
 let walls
 let stars;
+let winText;
+let deathText;
 
 
 function preload() {
