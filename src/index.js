@@ -244,6 +244,8 @@ function create() {
   pointsText.setScrollFactor(0);
   healthText = this.add.text(16, 48, 'Health: 0', { fontSize: '32px', fill: '#000' });
   healthText.setScrollFactor(0);
+  winText = this.add.text(250, 350, '', { fontSize: '64px', fill: '#000' });
+  winText.setScrollFactor(0);
 
   /*======================
   CREATE CHARACTER ANIMATION
@@ -478,5 +480,5 @@ function hitObstacles(player) {
 }
 
 function gameWin(){
-  // Win Game
+  winText.setText('You Won!');
 }
