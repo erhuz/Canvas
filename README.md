@@ -25,3 +25,6 @@ Just a simple game about collecting stars and not dying :)
 12. User interface
 13. Win death feature
 14. Added Readme
+
+## License
+MIT License
