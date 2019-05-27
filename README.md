@@ -31,7 +31,9 @@ Just a simple game about collecting stars and not dying :)
 14. [Added Readme](https://github.com/erhuz/Canvas/pull/14)
 15. [Updated readme](https://github.com/erhuz/Canvas/pull/15)
 16. [Fix: Set text-health to 100 on start](https://github.com/erhuz/Canvas/pull/16)
-17. [Fix: Updated readme](https://github.com/erhuz/Canvas/pull/17)
+17. [Feedback from brooman](https://github.com/erhuz/Canvas/pull/17) (Awaiting requested changes)
+18. [Fix: Updated readme](https://github.com/erhuz/Canvas/pull/18)
+19. [Fix: Updated readme links](https://github.com/erhuz/Canvas/pull/19)
 
 ## Our review to Group 2
 [Pull Request](https://github.com/xhika/game-over/pull/31)
