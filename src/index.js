@@ -486,8 +486,10 @@ function hitObstacles(player) {
 
 function gameWin(){
   winText.setText('You Won!');
+  player.disableBody(true, false);
 }
 
 function gameOver(){
   deathText.setText('You Died!');
+  player.disableBody(true, true);
 }
