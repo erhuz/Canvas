@@ -3,6 +3,8 @@
 # Star Hunt
 Just a simple game about collecting stars and not dying :)
 
+[Demo](https://mb-canvas.netlify.com/)
+
 ## Testers
 * [Laureta Dzika (wu18)](https://github.com/xhika)
 * [Gustav Svendsen (wu18)](https://github.com/gsvendsen/)
