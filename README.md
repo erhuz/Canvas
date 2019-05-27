@@ -15,20 +15,23 @@ Just a simple game about collecting stars and not dying :)
 * Stephen Hildingsson
 
 ## Pull Requests
-1. Added Player sprite sheet and animation.
-2. World creation
-3. Added basic movement
-4. Camera follow feature
-5. Character animation
-6. Added Dangerous obstacles 
-7. Larger world feature
-8. Added left and right player animation
-9. Better world feature
-10. Collectibles feature (CLOSED)
-11. Points system feature
-12. User interface
-13. Win death feature
-14. Added Readme
+1. [Added Player sprite sheet and animation.](https://github.com/erhuz/Canvas/pull/1)
+2. [World creation](https://github.com/erhuz/Canvas/pull/2)
+3. [Added basic movement](https://github.com/erhuz/Canvas/pull/3)
+4. [Camera follow feature](https://github.com/erhuz/Canvas/pull/4)
+5. [Character animation](https://github.com/erhuz/Canvas/pull/5)
+6. [Added Dangerous obstacles](https://github.com/erhuz/Canvas/pull/6)
+7. [Larger world feature](https://github.com/erhuz/Canvas/pull/7)
+8. [Added left and right player animation](https://github.com/erhuz/Canvas/pull/8)
+9. [Better world feature](https://github.com/erhuz/Canvas/pull/9)
+10. [Collectibles feature (CLOSED)](https://github.com/erhuz/Canvas/pull/10)
+11. [Points system feature](https://github.com/erhuz/Canvas/pull/11)
+12. [User interface](https://github.com/erhuz/Canvas/pull/12)
+13. [Win death feature](https://github.com/erhuz/Canvas/pull/13)
+14. [Added Readme](https://github.com/erhuz/Canvas/pull/14)
+15. [Updated readme](https://github.com/erhuz/Canvas/pull/15)
+16. [Fix: Set text-health to 100 on start](https://github.com/erhuz/Canvas/pull/16)
+17. [Fix: Updated readme](https://github.com/erhuz/Canvas/pull/17)
 
 ## Our review to Group 2
 [Pull Request](https://github.com/xhika/game-over/pull/31)
