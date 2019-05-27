@@ -30,5 +30,8 @@ Just a simple game about collecting stars and not dying :)
 13. Win death feature
 14. Added Readme
 
+## Our review to Group 2
+[Pull Request](https://github.com/xhika/game-over/pull/31)
+
 ## License
 MIT License
