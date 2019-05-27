@@ -46,8 +46,9 @@ let pointsText;
 let spikes;
 let walls
 let stars;
+let winText;
+let deathText;
 let background;
-
 
 function preload() {
 
@@ -243,6 +244,10 @@ function create() {
   pointsText.setScrollFactor(0);
   healthText = this.add.text(16, 48, 'Health: 0', { fontSize: '32px', fill: '#000' });
   healthText.setScrollFactor(0);
+  winText = this.add.text(250, 350, '', { fontSize: '64px', fill: '#000' });
+  winText.setScrollFactor(0);
+  deathText = this.add.text(250, 350, '', { fontSize: '64px', fill: '#000' });
+  deathText.setScrollFactor(0);
 
   /*======================
   CREATE CHARACTER ANIMATION
@@ -446,6 +451,9 @@ function damagePlayer(damage){
 
     healthText.setText('Health: ' + playerHealth);
 
+    if(playerHealth <= 0){
+      gameOver();
+    }
 
     // Debug logging
     console.log(`Health: ${(playerHealth + damage)} => ${playerHealth}`);
@@ -477,5 +485,11 @@ function hitObstacles(player) {
 }
 
 function gameWin(){
-  // Win Game
+  winText.setText('You Won!');
+  player.disableBody(true, false);
+}
+
+function gameOver(){
+  deathText.setText('You Died!');
+  player.disableBody(true, true);
 }
