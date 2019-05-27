@@ -242,7 +242,7 @@ function create() {
   
   pointsText = this.add.text(16, 16, 'Points: 0', { fontSize: '32px', fill: '#000' });
   pointsText.setScrollFactor(0);
-  healthText = this.add.text(16, 48, 'Health: 0', { fontSize: '32px', fill: '#000' });
+  healthText = this.add.text(16, 48, 'Health: 100', { fontSize: '32px', fill: '#000' });
   healthText.setScrollFactor(0);
   winText = this.add.text(250, 350, '', { fontSize: '64px', fill: '#000' });
   winText.setScrollFactor(0);
