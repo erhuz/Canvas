@@ -29,6 +29,9 @@ Just a simple game about collecting stars and not dying :)
 12. User interface
 13. Win death feature
 14. Added Readme
+15. Updated readme
+16. Fix: Set text-health to 100 on start
+17. Fix: Updated readme
 
 ## Our review to Group 2
 [Pull Request](https://github.com/xhika/game-over/pull/31)
