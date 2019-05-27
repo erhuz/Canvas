@@ -9,6 +9,8 @@ Just a simple game about collecting stars and not dying :)
 * [Vincent Lidebo Kjellman (wu18)](https://github.com/VincentLideboKjellman)
 * Carina Fransson
 * Anders Fransson
+* Christian Ravantti
+* Stephen Hildingsson
 
 ## Pull Requests
 1. Added Player sprite sheet and animation.
