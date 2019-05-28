@@ -38,5 +38,14 @@ Just a simple game about collecting stars and not dying :)
 ## Our review to Group 2
 [Pull Request](https://github.com/xhika/game-over/pull/31)
 
+## Comments
+- [index.js:77](https://github.com/erhuz/Canvas/blob/master/src/index.js#L77) - Remember to remove unused code
+- [index.js:122](https://github.com/erhuz/Canvas/blob/master/src/index.js#L122) - You could probably move the room blocks into separate files / functions. Or build a JSON file for each room and build the level with a loop. `*.create(json)` etc
+- [index.js:132](https://github.com/erhuz/Canvas/blob/master/src/index.js#L132) - Maybe remove some whitespace?
+- [index.js:234](https://github.com/erhuz/Canvas/blob/master/src/index.js#L234) - ~~Unused~~ Empty 'header'
+- [index.js:386](https://github.com/erhuz/Canvas/blob/master/src/index.js#L386) - You could probably clean this part up.
+- [index.js:444](https://github.com/erhuz/Canvas/blob/master/src/index.js#L444) - Remove debug logging
+- [index.js:458](https://github.com/erhuz/Canvas/blob/master/src/index.js#L458) - Remove debug logging
+
 ## License
 MIT License
